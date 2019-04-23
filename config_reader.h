@@ -16,7 +16,7 @@ private:
 public:
     std::map<std::string, std::string> m;
 
-    config(const std::string &filename) : filename(filename) {
+    config(const std::string &filename = "config.dat") : filename(filename) {
         std::ifstream file(filename);
         if (file.is_open()) {
             std::string tmp_str;

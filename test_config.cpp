@@ -7,7 +7,7 @@
 
 int main() {
 
-    config config("config.dat");
+    config config;
 
     std::cout << config.get_string("infile") << std::endl;
     std::cout << config.get_string("out_by_a") << std::endl;
