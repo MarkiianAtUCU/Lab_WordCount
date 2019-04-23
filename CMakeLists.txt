@@ -14,5 +14,5 @@ LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 #target_link_libraries(lab2 libarchive)
 
 #add_executable(Lab_WordCount main.cpp libarchive_wrapper.cpp libarchive_wrapper.h config_reader.h test_config.cpp)
-add_executable(Lab_WordCount test_config.cpp config_reader.h ${Boost_LIBRARIES})
+add_executable(Lab_WordCount count_words.cpp ${Boost_LIBRARIES})
 #target_link_libraries( Lab_WordCount ${Boost_LIBRARIES} libarchive)
