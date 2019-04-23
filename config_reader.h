@@ -1,4 +1,4 @@
- //
+//
 // Created by matsiuk on 31-Mar-19.
 //
 
@@ -7,7 +7,7 @@
 
 #include <string>
 #include <map>
-
+#include <boost/algorithm/string.hpp>
 #include <fstream>
 
 class config {
@@ -21,6 +21,7 @@ public:
         if (file.is_open()) {
             std::string tmp_str;
             while (std::getline(file, tmp_str)) {
+                boost::erase_all(tmp_str, "\"");
                 int x = tmp_str.find('=');
                 m[tmp_str.substr(0, x)] = tmp_str.substr(x+1, tmp_str.length());
 
@@ -31,9 +32,9 @@ public:
         }
     }
 
-    double get_double(std::string query) {
+    std::string get_string(std::string query) {
         try {
-            return std::stod(m[query]);
+            return std::string(m[query]);
         } catch (const std::invalid_argument& e) {
             throw std::invalid_argument(query+" has invalid value for double or not in config file");
         }
