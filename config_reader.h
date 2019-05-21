@@ -21,8 +21,8 @@ public:
         if (file.is_open()) {
             std::string tmp_str;
             while (std::getline(file, tmp_str)) {
-                int x = tmp_str.find('=');
-                m[tmp_str.substr(0, x)] = tmp_str.substr(x+1, tmp_str.length());
+                int x = tmp_str.find(":");
+                m[tmp_str.substr(0, x)] = tmp_str.substr(x+2, tmp_str.length());
 
             }
             file.close();
@@ -42,6 +42,14 @@ public:
     int get_int(std::string query) {
         try {
             return std::stoi(m[query]);
+        } catch (const std::invalid_argument& e) {
+            throw std::invalid_argument(query+" has invalid value for int or not in config file");
+        }
+    }
+
+    std::string get_string(std::string query) {
+        try {
+            return m[query];
         } catch (const std::invalid_argument& e) {
             throw std::invalid_argument(query+" has invalid value for int or not in config file");
         }

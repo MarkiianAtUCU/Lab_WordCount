@@ -10,8 +10,9 @@ find_package(libarchive REQUIRED)
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 
-#add_executable(lab2 main2.c)
-#target_link_libraries(lab2 libarchive)
 
-add_executable(Lab_WordCount main.cpp libarchive_wrapper.cpp libarchive_wrapper.h config_reader.h)
-target_link_libraries( Lab_WordCount ${Boost_LIBRARIES} libarchive)
+add_executable(Lab_WordCount_one_thread Word_count_one_thread.cpp config_reader.h FileProcessor.cpp FileProcessor.h time_meter.h)
+target_link_libraries( Lab_WordCount_one_thread ${Boost_LIBRARIES} libarchive)
+
+add_executable(Lab_WordCount_multi_thread Word_count_multi_thread.cpp config_reader.h FileProcessor.cpp FileProcessor.h time_meter.h)
+target_link_libraries( Lab_WordCount_multi_thread ${Boost_LIBRARIES} libarchive)

@@ -1,0 +1,4 @@
+num_threads: 16
+in_file: ../data.zip
+out_file_a: res_alpha.txt
+out_file_n: res_num.txt
