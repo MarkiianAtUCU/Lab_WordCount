@@ -1,10 +1,10 @@
 #include <iostream>
 #include "boost/filesystem.hpp"
-#include "FileProcessor.h"
+#include "../dependencies/FileProcessor.h"
 #include <vector>
 #include "boost/locale.hpp"
-#include "time_meter.h"
-#include "config_reader.h"
+#include "../dependencies/time_meter.h"
+#include "../dependencies/config_reader.h"
 #include <thread>
 #include <mutex>
 #include <boost/iterator/distance.hpp>
@@ -21,14 +21,23 @@ void process (std::mutex & mtx, std::vector<std::string> & data, long from, long
 
 }
 
-int main() {
+int main(int argc, char **argv) {
+    if (argc != 2) {
+        try {
+            auto config_object = config("./config.dat");
+        } catch (...) {
+            std::cout << "Incorrect number of arguments:" << std::endl << "./Word_count2_multi_thread <config path>" <<std::endl;
+            exit(1);
+        }
+    }
+
     boost::locale::generator gen;
     std::locale loc = gen("");
     std::locale::global(loc);
     std::wcout.imbue(loc);
     std::ios_base::sync_with_stdio(false);
 
-    auto config_object = config("../config.txt");
+    auto config_object = config(argv[1]);
     std::string in_file = config_object.get_string("in_file");
     std::string out_file_a = config_object.get_string("out_file_a");
     std::string out_file_n = config_object.get_string("out_file_n");

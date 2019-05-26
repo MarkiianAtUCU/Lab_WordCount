@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include "boost/filesystem.hpp"
+#include <map>
 
 struct FileProcessor {
     static bool is_archive(boost::filesystem::path & entry);
